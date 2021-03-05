@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_001821) do
+ActiveRecord::Schema.define(version: 2021_03_05_011129) do
+
+  create_table "deputies", force: :cascade do |t|
+    t.string "name"
+    t.integer "deputy_id"
+    t.string "card_number"
+    t.string "federal_id"
+    t.string "state", limit: 2
+    t.string "political_party", limit: 255
+    t.integer "legislature_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["legislature_id"], name: "index_deputies_on_legislature_id"
+  end
 
   create_table "legislatures", force: :cascade do |t|
     t.integer "year"
@@ -18,4 +31,5 @@ ActiveRecord::Schema.define(version: 2021_03_05_001821) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "deputies", "legislatures"
 end
