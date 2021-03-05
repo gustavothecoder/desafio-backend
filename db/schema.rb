@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_013433) do
+ActiveRecord::Schema.define(version: 2021_03_05_023224) do
 
   create_table "deputies", force: :cascade do |t|
     t.string "name"
@@ -39,6 +39,32 @@ ActiveRecord::Schema.define(version: 2021_03_05_013433) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "expenses", force: :cascade do |t|
+    t.integer "document_number"
+    t.string "provider"
+    t.string "federal_id"
+    t.integer "kind"
+    t.datetime "issue_date"
+    t.decimal "document_value"
+    t.decimal "gloss_value"
+    t.decimal "net_value"
+    t.integer "month"
+    t.integer "year"
+    t.integer "portion"
+    t.string "passenger"
+    t.string "part"
+    t.string "batch"
+    t.string "refund"
+    t.string "restitution"
+    t.string "document_url"
+    t.integer "expense_type_id", null: false
+    t.integer "deputy_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deputy_id"], name: "index_expenses_on_deputy_id"
+    t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
+  end
+
   create_table "legislatures", force: :cascade do |t|
     t.integer "year"
     t.datetime "created_at", precision: 6, null: false
@@ -47,4 +73,6 @@ ActiveRecord::Schema.define(version: 2021_03_05_013433) do
 
   add_foreign_key "deputies", "legislatures"
   add_foreign_key "expense_type_specifications", "expense_types"
+  add_foreign_key "expenses", "deputies"
+  add_foreign_key "expenses", "expense_types"
 end
