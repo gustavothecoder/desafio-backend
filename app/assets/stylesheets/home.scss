@@ -1,0 +1,25 @@
+.home-header,
+.upload-area,
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-button {
+  background-color: #7F42D9;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 50px;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+
+  &:hover {
+    background-color: #6226bb;
+  }
+}
