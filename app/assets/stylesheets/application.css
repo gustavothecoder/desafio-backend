@@ -28,3 +28,8 @@ a {
   text-decoration: none;
   color: #7F42D9;
 }
+
+.error-message {
+  font-weight: bold;
+  color: red;
+}
