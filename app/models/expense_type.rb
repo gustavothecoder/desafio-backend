@@ -2,4 +2,5 @@
 
 class ExpenseType < ApplicationRecord
   has_one :expense_type_specification
+  has_many :expenses
 end
