@@ -1,0 +1,2 @@
+class Legislature < ApplicationRecord
+end
