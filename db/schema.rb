@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_023224) do
+ActiveRecord::Schema.define(version: 2021_03_05_163757) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "deputies", force: :cascade do |t|
     t.string "name"
@@ -19,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_023224) do
     t.string "federal_id"
     t.string "state", limit: 2
     t.string "political_party", limit: 255
-    t.integer "legislature_id", null: false
+    t.bigint "legislature_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legislature_id"], name: "index_deputies_on_legislature_id"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_023224) do
 
   create_table "expense_type_specifications", force: :cascade do |t|
     t.text "description"
-    t.integer "expense_type_id", null: false
+    t.bigint "expense_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["expense_type_id"], name: "index_expense_type_specifications_on_expense_type_id"
@@ -45,9 +48,9 @@ ActiveRecord::Schema.define(version: 2021_03_05_023224) do
     t.string "federal_id"
     t.integer "kind"
     t.datetime "issue_date"
-    t.decimal "document_value"
-    t.decimal "gloss_value"
-    t.decimal "net_value"
+    t.decimal "document_value", precision: 9, scale: 2
+    t.decimal "gloss_value", precision: 9, scale: 2
+    t.decimal "net_value", precision: 9, scale: 2
     t.integer "month"
     t.integer "year"
     t.integer "portion"
@@ -57,8 +60,8 @@ ActiveRecord::Schema.define(version: 2021_03_05_023224) do
     t.string "refund"
     t.string "restitution"
     t.string "document_url"
-    t.integer "expense_type_id", null: false
-    t.integer "deputy_id", null: false
+    t.bigint "expense_type_id", null: false
+    t.bigint "deputy_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deputy_id"], name: "index_expenses_on_deputy_id"
