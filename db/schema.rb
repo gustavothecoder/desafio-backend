@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_012613) do
+ActiveRecord::Schema.define(version: 2021_03_05_013433) do
 
   create_table "deputies", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2021_03_05_012613) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["legislature_id"], name: "index_deputies_on_legislature_id"
+  end
+
+  create_table "expense_type_specifications", force: :cascade do |t|
+    t.text "description"
+    t.integer "expense_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_type_id"], name: "index_expense_type_specifications_on_expense_type_id"
   end
 
   create_table "expense_types", force: :cascade do |t|
@@ -38,4 +46,5 @@ ActiveRecord::Schema.define(version: 2021_03_05_012613) do
   end
 
   add_foreign_key "deputies", "legislatures"
+  add_foreign_key "expense_type_specifications", "expense_types"
 end
