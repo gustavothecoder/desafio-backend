@@ -2,6 +2,7 @@
 
 class DeputyPresenter < BasePresenter
   include ApplicationHelper
+  include ExpensesHelper
 
   def initialize(deputy)
     super(deputy)
@@ -18,6 +19,10 @@ class DeputyPresenter < BasePresenter
 
   def highest_expense_issue_date
     format_time(@highest_expense.issue_date)
+  end
+
+  def highest_expense_link
+    helpers.invoice_link(@highest_expense.document_url, 'aqui')
   end
 
   def total_spend
