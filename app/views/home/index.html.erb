@@ -16,6 +16,7 @@
   <%= form_with url: populate_from_csv_path, class: 'upload-form' do |f| %>
     <%= f.file_field :data %>
     <p class="error-message"><%= flash[:alert] %></p>
-    <%= f.submit 'Mostrar gastos', class: 'submit-button' %>
+    <%= f.submit 'Inserir dados', class: 'submit-button' %>
+    <%= link_to 'Ver deutados', deputies_path %>
   <% end %>
 </section>
