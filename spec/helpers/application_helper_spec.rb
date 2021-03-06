@@ -18,4 +18,11 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe '#format_time' do
+    it 'should return 25/12/20' do
+      time = Time.new(2020, 12, 25, 10, 24, 25)
+      expect(format_time(time)).to eq('25/12/20')
+    end
+  end
 end
