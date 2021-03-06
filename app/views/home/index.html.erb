@@ -1,5 +1,5 @@
 <header class="home-header">
-  <%= image_tag 'detective_icon.svg', size: '150x150' %>
+  <%= render 'shared/logo' %>
   <h2>
     Descubra como os deputados de SP gastam a sua 
     <a href="https://www2.camara.leg.br/transparencia/acesso-a-informacao/copy_of_perguntas-frequentes/cota-para-o-exercicio-da-atividade-parlamentar" target="_blank">
@@ -17,6 +17,6 @@
     <%= f.file_field :data %>
     <p class="error-message"><%= flash[:alert] %></p>
     <%= f.submit 'Inserir dados', class: 'submit-button' %>
-    <%= link_to 'Ver deutados', deputies_path %>
+    <%= link_to 'Ver deputados', deputies_path %>
   <% end %>
 </section>
