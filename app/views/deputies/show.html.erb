@@ -1,0 +1,47 @@
+<section class="deputy-area">
+  <%= render 'shared/logo' %>
+  <div class="deputy-info-area">
+    <div>
+      <div class="breadcrumb">
+        <%= link_to 'Deputados', deputies_path %>
+        <p class="breadcrumb-divisor">></p>
+        <p><%= summarize_name(@deputy.name) %></p>
+      </div>
+      <%= image_tag "http://www.camara.leg.br/internet/deputado/bandep/#{@deputy.deputy_id}.jpg", width: '200px' %>
+    </div>
+    <div class="deputy-info">
+      <h2><%= @deputy.name %></h2>
+      <p><strong>Identificador: </strong> <%= @deputy.deputy_id %></p>
+      <p><strong>Carteira Parlamentar: </strong> <%= @deputy.card_number %></p>
+      <p><strong>CPF: </strong> <%= @deputy.federal_id %></p>
+      <p><strong>Estado: </strong> <%= @deputy.state %></p>
+      <p><strong>Partido: </strong> <%= @deputy.political_party %></p>
+      <p><strong>Legislatura: </strong> <%= @deputy.legislature.year %></p>
+    </div>
+  </div>
+  <div class="expenses-area">
+    <hr>
+    <h2>Despesas</h2>
+    <p> 
+      O maior gasto de <%= @deputy.name %> foi no valor de <strong>R$ <%= @deputy.highest_expense_net_value %></strong>, 
+      esse gasto foi realizado com o provedor <strong><%= @deputy.highest_expense_provider %></strong> na data de 
+      <strong><%= @deputy.highest_expense_issue_date %></strong>. Suas despesas já acumulam <strong>R$ <%= @deputy.total_spend %></strong>.
+    <p>
+    <table>
+      <tr>
+        <th>Data de emissão</th>
+        <th>Estabelecimento</th>
+        <th>Valor</th>
+        <th>Nota</th>
+      </tr>
+      <% @deputy.expenses.each do |expense| %>
+        <tr>
+          <td><%= format_time(expense.issue_date) %></td>
+          <td><%= expense.provider %></td>
+          <td><%= expense.net_value %></td>
+          <td><%= invoice_link(expense.document_url) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</section>
