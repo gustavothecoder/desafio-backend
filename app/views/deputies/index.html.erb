@@ -1,0 +1,14 @@
+<header class="deputies-header">
+  <%= render 'shared/logo' %>
+  <h2>Clique no deputado desejado para visualizar suas informações</h2>
+</header>
+<section class="deputy-list">
+  <% @deputies.each do |deputy| %>
+    <a href=<%= deputy_path(deputy.id) %>>
+      <div class="deputy-card">
+        <%= image_tag "http://www.camara.leg.br/internet/deputado/bandep/#{deputy.deputy_id}.jpg", width: '200px' %>
+        <p><%= summarize_name(deputy.name) %></p>
+      </div>
+    </a>
+  <% end %>
+</section>
