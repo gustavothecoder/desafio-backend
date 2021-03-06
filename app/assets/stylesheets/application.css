@@ -33,3 +33,11 @@ a {
   font-weight: bold;
   color: red;
 }
+
+.logo {
+  display: flex;
+}
+
+.dollar {
+  color: #7F42D9;
+}
