@@ -47,16 +47,35 @@ RSpec.describe Database::PopulateFromCsv, type: :service do
     end
   end
 
-  context 'when there is an error on the second line of the CSV' do
+  describe 'when there is an error on the first line of the CSV' do
     before(:all) do
       Legislature.destroy_all
       ExpenseType.destroy_all
-      csv = Rack::Test::UploadedFile.new('spec/fixtures/bad_csv.csv')
+      csv = Rack::Test::UploadedFile.new('spec/fixtures/first_line_error.csv')
       @result = Database::PopulateFromCsv.call(csv)
     end
 
     it 'should return false' do
       expect(@result).to be(false)
+    end
+
+    it 'should not create records' do
+      expect(Legislature.count).to eq(0)
+      expect(Deputy.count).to eq(0)
+      expect(ExpenseType.count).to eq(0)
+      expect(ExpenseTypeSpecification.count).to eq(0)
+      expect(Expense.count).to eq(0)
+    end
+  end
+
+  context 'when there is an error on the second line of the CSV' do
+    before(:all) do
+      csv = Rack::Test::UploadedFile.new('spec/fixtures/second_line_error.csv')
+      @result = Database::PopulateFromCsv.call(csv)
+    end
+
+    it 'should return false' do
+      expect(@result).to be(true)
     end
 
     it 'should only create the 2019 legislature' do
