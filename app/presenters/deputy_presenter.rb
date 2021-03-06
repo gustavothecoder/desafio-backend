@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This class help us to remove logic from deputies#show view
 class DeputyPresenter < BasePresenter
   include ApplicationHelper
   include ExpensesHelper
