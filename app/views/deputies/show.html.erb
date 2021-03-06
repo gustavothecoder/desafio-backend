@@ -25,7 +25,8 @@
     <p> 
       O maior gasto de <%= @deputy.name %> foi no valor de <strong>R$ <%= @deputy.highest_expense_net_value %></strong>, 
       esse gasto foi realizado com o provedor <strong><%= @deputy.highest_expense_provider %></strong> na data de 
-      <strong><%= @deputy.highest_expense_issue_date %></strong>. Suas despesas já acumulam <strong>R$ <%= @deputy.total_spend %></strong>.
+      <strong><%= @deputy.highest_expense_issue_date %></strong>, clique <%= @deputy.highest_expense_link %> para visualizar a nota fiscal. 
+      Suas despesas já acumulam <strong>R$ <%= @deputy.total_spend %></strong>.
     <p>
     <table>
       <tr>
