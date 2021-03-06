@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../presenters/deputy_presenter'
-
 class DeputiesController < ApplicationController
   def index
     @deputies = Deputy.all
