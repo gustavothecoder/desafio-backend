@@ -9,5 +9,6 @@ class DeputiesController < ApplicationController
 
   def show
     @deputy = DeputyPresenter.new(Deputy.find(params[:id]))
+    @expenses = @deputy.expenses.page(params[:page]).per(50)
   end
 end
