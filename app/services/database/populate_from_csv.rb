@@ -21,9 +21,9 @@ module Database
     def populate
       directory = create_csv_directory
       populate_from_csv(directory)
-      true
+      Expense.any?
     rescue StandardError
-      false
+      Expense.any?
     ensure
       FileUtils.rm_rf(directory)
     end
@@ -38,19 +38,26 @@ module Database
     end
 
     def populate_from_csv(csv_directory)
-      ActiveRecord::Base.transaction do
-        CSV.foreach(csv_directory + @csv.original_filename, headers: true, col_sep: ';') do |row|
-          next if row['sgUF'] != 'SP'
+      directory = csv_directory + @csv.original_filename
+      CSV.foreach(directory, headers: true, encoding: 'bom|utf-8', col_sep: ';') do |row|
+        next if row['sgUF'] != 'SP'
 
-          legislature = Legislature.find_or_create_by!(year: row['nuLegislatura'])
-          deputy = find_or_create_deputy!(row, legislature)
-          expense_type = ExpenseType.find_or_create_by!(description: row['txtDescricao'])
-          ExpenseTypeSpecification.find_or_create_by!(
-            description: row['txtDescricaoEspecificacao'], expense_type_id: expense_type.id
-          )
-          create_expense!(row, deputy, expense_type)
+        ActiveRecord::Base.transaction do
+          create_records!(row)
         end
       end
+    end
+
+    def create_records!(csv_row)
+      legislature = Legislature.find_or_create_by!(year: csv_row['nuLegislatura'])
+      deputy = find_or_create_deputy!(csv_row, legislature)
+      expense_type = ExpenseType.find_or_create_by!(description: csv_row['txtDescricao'])
+      if expense_type.expense_type_specification.blank?
+        ExpenseTypeSpecification.create!(
+          description: csv_row['txtDescricaoEspecificacao'], expense_type_id: expense_type.id
+        )
+      end
+      create_expense!(csv_row, deputy, expense_type)
     end
 
     def find_or_create_deputy!(csv_row, legislature)
