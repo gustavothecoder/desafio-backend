@@ -73,4 +73,11 @@
     tr:nth-child(even){ background-color: #f2f2f2 }
   }
 }
+
+.pagination-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+}
 /*—————*/
