@@ -4,9 +4,11 @@ require 'rails_helper'
 
 RSpec.describe DeputyPresenter, type: :presenter do
   let(:deputy) { create(:deputy) }
-  let!(:expense) { create(:expense, net_value: 230.00, deputy: deputy) }
+  let!(:expense) do
+    create(:expense, provider: 'blabla', net_value: 230.00, document_url: 'https://www.bla.com', deputy: deputy)
+  end
   let(:time) { Time.new(2020, 12, 25, 10, 24, 25) }
-  let!(:other_expense) { create(:expense, issue_date: time, net_value: 270.00, deputy: deputy) }
+  let!(:other_expense) { create(:expense, provider: 'provider', issue_date: time, net_value: 270.00, deputy: deputy) }
   let(:deputy_presenter) { DeputyPresenter.new(deputy) }
 
   describe '#highest_expense_net_value' do
