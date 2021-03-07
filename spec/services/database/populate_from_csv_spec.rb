@@ -74,7 +74,7 @@ RSpec.describe Database::PopulateFromCsv, type: :service do
       @result = Database::PopulateFromCsv.call(csv)
     end
 
-    it 'should return false' do
+    it 'should return true' do
       expect(@result).to be(true)
     end
 
