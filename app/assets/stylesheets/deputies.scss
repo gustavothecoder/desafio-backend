@@ -1,0 +1,83 @@
+/* =index */
+.deputies-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deputy-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.deputy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+  transition-duration: 0.5s;
+
+  &:hover {
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.25);
+  }
+}
+/*—————*/
+
+/* =show */
+.deputy-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deputy-info-area {
+  display: flex;
+  justify-content: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-divisor {
+  margin: 0 10px;
+}
+
+.deputy-info {
+  margin-left: 75px;
+  width: 300px;
+}
+
+.expenses-area {
+  width: 600px;
+  margin: auto;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    th {
+      background-color: #6226bb;
+      color: white;
+    }
+    
+    tr:nth-child(even){ background-color: #f2f2f2 }
+  }
+}
+
+.pagination-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+}
+/*—————*/

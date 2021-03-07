@@ -1,0 +1,22 @@
+<header class="home-header">
+  <%= render 'shared/logo' %>
+  <h2>
+    Descubra como os deputados de SP gastam a sua 
+    <a href="https://www2.camara.leg.br/transparencia/acesso-a-informacao/copy_of_perguntas-frequentes/cota-para-o-exercicio-da-atividade-parlamentar" target="_blank">
+      CEAP
+    </a>
+  </h2>
+</header>
+<section class="upload-area">
+  <h3>
+    Faça o download da fonte de dados 
+    <a href="https://dadosabertos.camara.leg.br/swagger/api.html#staticfile" target="_blank">aqui</a>
+    e depois faça o upload clicando no botão abaixo:
+  </h3>
+  <%= form_with url: populate_from_csv_path, class: 'upload-form' do |f| %>
+    <%= f.file_field :data %>
+    <p class="error-message"><%= flash[:alert] %></p>
+    <%= f.submit 'Inserir dados', class: 'submit-button' %>
+    <%= link_to 'Ver deputados', deputies_path %>
+  <% end %>
+</section>
