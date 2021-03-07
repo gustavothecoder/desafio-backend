@@ -6,7 +6,7 @@ RSpec.describe Legislature, type: :model do
   let(:legislature) { create(:legislature) }
 
   describe 'associations' do
-    describe 'has_many :parliamentarians' do
+    describe 'has_many :deputies' do
       let!(:deputy) { create(:deputy, legislature: legislature) }
       let!(:other_deputy) { create(:deputy, legislature: legislature) }
 
