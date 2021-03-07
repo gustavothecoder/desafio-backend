@@ -4,7 +4,7 @@
   <img src="app_demo.gif" />
 </p>
 
-A aplicação foi hospedada no Heroku e pode ser vista funcionando [aqui](https://ae-desafio-backend.herokuapp.com/). No entanto, por limitações do banco de dados disponível gratuitamente, somente alguns registros foram incluídos, para visualizar o app funcionando com todos os dados o mesmo precisa rodar localmente (guia para isso logo abaixo). 
+A aplicação foi hospedada no Heroku e pode ser vista funcionando [aqui](https://ae-desafio-backend.herokuapp.com/), após entrar no app clique em ver deputados. No entanto, por limitações do banco de dados disponível gratuitamente, somente alguns registros foram incluídos, para visualizar o app funcionando com todos os dados o mesmo precisa rodar localmente (guia para isso logo abaixo). 
 
 ## Descrição do desafio
 
