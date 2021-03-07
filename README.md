@@ -1,6 +1,10 @@
 # Ranking dos gastos dos Deputados
 
-Estamos muito felizes que você tenha chegado nessa etapa do nosso processo seletivo, para essa fase, desejamos que você resolva um desafio. Nosso desafio consiste em analisar alguns dados disponibilizados pelo Câmara dos Deputados relativos aos gastos dos parlamentares. A ideia é descobrir quem, do seu estado, está gastando mais e exibir de forma resumida esses principais gastos.
+<p align="center">
+  <img src="app_demo.gif" />
+</p>
+
+A aplicação foi hospedada no Heroku e pode ser vista funcionando [aqui](https://ae-desafio-backend.herokuapp.com/). No entanto, por limitações do banco de dados disponível gratuitamente, somente alguns registros foram incluídos, para visualizar o app funcionando com todos os dados o mesmo precisa rodar localmente (guia para isso logo abaixo). 
 
 ## Descrição do desafio
 
@@ -10,38 +14,56 @@ Você já ouviu falar da CEAP? A Cota para o Exercício da Atividade Parlamentar
 
 - [Fonte de dados (pegar o referente ao ano 2020 em formato CSV)](https://dadosabertos.camara.leg.br/swagger/api.html#staticfile)
 - [Explicação dos campos do arquivo CSV](https://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/explicacoes-sobre-o-formato-dos-arquivos-xml)
-- Ignorar linhas que não tenham no campo `sgUF` o estado que você mora. O objetivo do trabalho é focar apenas no seu estado;
-- Considerar para fins de cálculos de despesa, o campo `vlrLiquido`. Esse é o valor que de fato foi debitado da cota do candidato;
-- Dica para pegar a foto do político: **http://www.camara.leg.br/internet/deputado/bandep/{ideCadastro}.jpg**
 
+## Rodando a aplicação localmente
+### Requisitos
 
-## Requisitos Obrigatórios
-- Possibilitar o upload do arquivo;
-- Organizar os dados extraidos do arquivo em tabelas no banco de dados;
-- Listagem dos deputados do seu estado;
-- Mostrar o somatório dos seus gastos;
-- Listar as despesas, mostrando a data(`datEmissao`), estabelecimento(`txtFornecedor`), valor(`vlrLiquido`), e link para a nota(`urlDocumento`);
-- Destacar a maior despesa do candidato;
-- Usar o framework Rails (utilize esse repositório como base);
-- Ter uma cobertura de código;
+Para executar esse projeto você vai precisar do:
+    
+  1. Ruby 2.6.5
+  2. Ruby on Rails 6.0.3
+  3. PostgreSQL
 
-# Requisitos bônus
-Esses requisitos não são obrigatórios, mas serão levados em consideração como pontos extras no momento da avaliação.
+### Clonando o repositório
 
-- Exibir gráficos para melhorar a visualização dos gastos;
-- Aplicação hospedada no Heroku, AWS ou similares;
-- Evitar N + 1 nas queries;
-- Organizar estrutura do projeto utilizando padrões de projetos;
+Rode esses comandos para clonar e entrar no repositório:
 
-# Critérios de avaliação
+```
+  $ git clone https://github.com/gustavothecoder/desafio-backend.git
 
-- Organização do projeto: Avalia a estrutura do projeto, documentação e uso de controle de versão;
-- Coerência: Avalia se os requisitos foram atendidos;
-- Boas práticas: Avalia se o projeto segue boas práticas de desenvolvimento, incluindo segurança e otimização;
-- Criatividade: Avalia o quanto você "pensou fora da caixa", levando em conta soluções criativas para os problemas levantados;
+  $ cd desafio-backend
+```
 
-O desafio deve ser entregue nos passando a URL de seu repositório. Fique a vontade caso queira incrementar o projeto com outras features não listadas aqui, iremos levar em consideração também!
+### Instalando as dependências
 
-Qualquer dúvida em relação ao desafio, responderemos por e-mail.
+Rode esses comandos para instalar todas as dependências:
 
-Bom trabalho!
+```
+  $ bundle install
+  
+  $ yarn install
+```
+
+### Criando o banco de dados
+
+Rode esses comandos para criar o banco de dados:
+
+```
+  $ rails db:create
+  
+  $ rails db:migrate && rails db:migrate RAILS_ENV=test
+```
+
+### Testando
+
+Verifique se tudo está OK rodando a suíte de testes com o comando `rspec`.
+
+### Finalmente, rodando o app
+
+Com todas as dependências instaladas e o seu ambiente configurado você poderá rodar o app com:
+
+```
+  $ rails s
+```
+
+Após, abra o seu navegador e acesse __localhost:3000__.
