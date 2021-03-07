@@ -19,27 +19,35 @@ module Database
     private
 
     def populate
-      directory = create_csv_directory
-      populate_from_csv(directory)
+      csv_directory = create_csv_directory
+      put_csv_on(csv_directory)
+      populate_from_csv(csv_directory)
+      # Expense.any? tells the controller if expenses have been created.
       Expense.any?
     rescue StandardError
+      # Expense.any? tells the controller if some expense can be created.
       Expense.any?
     ensure
-      FileUtils.rm_rf(directory)
+      FileUtils.rm_rf(csv_directory)
     end
 
     def create_csv_directory
-      csv_folder = FileUtils.mkdir_p("tmp/csv/#{Time.current.to_f * 1000}/")
-      csv_directory = csv_folder[0]
-      File.open(csv_directory + @csv.original_filename, 'wb') do |file|
+      # Time.current.to_f * 1000 generates the current time in milliseconds.
+      unique_name_folder = Time.current.to_f * 1000
+      csv_directory = FileUtils.mkdir_p("tmp/csv/#{unique_name_folder}/")
+      # The combination below generates the directory where the csv will be placed.
+      csv_directory[0] + @csv.original_filename
+    end
+
+    def put_csv_on(csv_directory)
+      File.open(csv_directory, 'wb') do |file|
         file.write(@csv.read)
       end
-      csv_directory
     end
 
     def populate_from_csv(csv_directory)
-      directory = csv_directory + @csv.original_filename
-      CSV.foreach(directory, headers: true, encoding: 'bom|utf-8', col_sep: ';') do |row|
+      # CSV.foreach reads one line at a time, this helps us to save RAM memory.
+      CSV.foreach(csv_directory, headers: true, encoding: 'bom|utf-8', col_sep: ';') do |row|
         next if row['sgUF'] != 'SP'
 
         ActiveRecord::Base.transaction do
